@@ -1,4 +1,5 @@
 from cmath import pi
+from timeit import default_timer as timer
 import sys
 import pickle
 from multiprocessing.pool import ThreadPool
@@ -347,4 +348,7 @@ evaluation_algorithms = sys.argv[9].split(',')
 # reduction_algorithm = "TSNE"
 # evaluation_algorithms = ['1','1','1','1','1']
 
+start = timer()
 compute_questions(filename, cluster_iter, question_num, cluster_num, ml, cl, unknown, reduction_algorithm, evaluation_algorithms)
+end = timer()
+print("interactive_constrained_clustering algo runtime: ", end-start)
