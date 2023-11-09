@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 import { Col, Row, ProgressBar, Button } from 'react-bootstrap';
 import { StatNumber } from "./individualStatNumber"
 import * as JSZip from 'jszip';
@@ -129,8 +130,17 @@ class RecStatDisplay extends Component {
                             Options
                             <Row>
                                 <Col>
+                                    <Link className="fixLinkOverButtonHover" to="/restart">
+                                        <Button className="btn-block" variant="danger">
+                                            Restart
+                                        </Button>
+                                    </Link>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
                                     <a className="fixLinkOverButtonHover" href={require("../../model/finalized_model.sav").default} download="model.sav">
-                                        <Button className="btn-block mb-3 mt-2">
+                                        <Button className="btn-block mb-2 mt-2">
                                             Export Model
                                         </Button>
                                     </a>
@@ -138,7 +148,7 @@ class RecStatDisplay extends Component {
                             </Row>
                             <Row>
                                 <Col>
-                                    <Button className="btn-block mb-3 mt-2" onClick={this.zipImagesFolderAndDownload}>
+                                    <Button className="btn-block mb-2" onClick={this.zipImagesFolderAndDownload}>
                                         Download Images
                                     </Button>
                                 </Col>

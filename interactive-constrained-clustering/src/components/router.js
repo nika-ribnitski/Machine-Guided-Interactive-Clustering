@@ -19,6 +19,13 @@ export default function Router() {
                     <div>
                         <Switch>
                             <Route exact path="/" render={() => <Landing />} />
+                            <Route exact path="/restart"
+                                render={() => {
+                                    return (
+                                        handleRedirect(context)
+                                    )
+                                }}
+                            />
                             <Route exact path="/questions"
                                 render={() => {
                                     return (
