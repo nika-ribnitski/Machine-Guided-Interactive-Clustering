@@ -1,7 +1,7 @@
 import FileUpload from './inputForm/inputForm';
 import React, { Component } from 'react';
 import { Col } from 'react-bootstrap';
-import Notification from '../../notification'
+//import Notification from '../../notification'
 import { AppContext } from "../../../App"
 import InfoPanel from './inputForm/infoPanel';
 
@@ -23,7 +23,6 @@ class Landing extends Component {
                 <AppContext.Consumer>
                     {context => (
                         <>
-                            <Notification text={context.notifMessage} show={context.error} type=""/>
                             <div className="rowNoMargin imgSection">
                                 {this.state.showInfo
                                 ? 

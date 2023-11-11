@@ -80,13 +80,19 @@ class FileForm extends Component {
                                         </div>
 
                                         <Formik
-                                            initialValues={new FormInput()}                                           
+                                            initialValues={new FormInput()}                        
                                             validationSchema={Yup.object({
+                                                //filename: Yup.string().matches(".\\.csv", "Select a file.").required("Select a file."),
                                                 questionsPerIteration: Yup.number().typeError("Must be a number.").required("Need this value to determine questions I can ask you."),
                                                 numberOfClusters: Yup.number().typeError("Must be a number.").required("Need this value to know the cluster amount based on your dataset."),
                                                 maxConstraintPercent: Yup.number().typeError("Must be a number.").required("Need this so I can help you stop when you are ready.")
                                             })}
                                             onSubmit={async values => {
+                                                // console.log("SUBMITTED")
+                                                if (!(this.fileName.includes("csv"))) {
+                                                    alert("Please select a file.");
+                                                    return false;
+                                                }
                                                 values.filename = this.fileName
                                                 values.reduction_algorithm = document.getElementById("reduction_algorithm").value
 
@@ -100,6 +106,11 @@ class FileForm extends Component {
                                                     }
                                                 }
                                                 values.algorithmsUsed = algorithmsUsed
+                                                // console.log(algorithmsUsed)
+                                                if (algorithmsUsed.every(i => i ===0)) {
+                                                    alert("Please select an evaluation algorithm.");
+                                                    return false;
+                                                }
 
                                                 context.verifiedInput()
                                                 if (values.questionsPerIteration % 2 !== 0) {
