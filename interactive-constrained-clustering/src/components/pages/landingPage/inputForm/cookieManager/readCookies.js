@@ -1,7 +1,4 @@
 // This function returns the cookies in a manageable state
-
-import { clearCookies } from "./clearCookies";
-
 // To be used in Python.js to set inital values for FormInput
 export function readCookies() {
     var pairs = document.cookie.split(";");
@@ -26,7 +23,8 @@ export function readCookies() {
         maxConstraintPercent: "0.000003",
         numberOfClusters: "3",
         questionsPerIteration: "20",
-        reduction_algorithm: "PCA"
+        reduction_algorithm: "PCA",
+        encoding_algorithm: "One-Hot Encoding"
       }
     }
     

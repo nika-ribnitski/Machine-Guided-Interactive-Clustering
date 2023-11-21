@@ -23,30 +23,20 @@ from active_semi_clustering.exceptions import InconsistentConstraintsException
 from anomatools.anomaly_detection import INNE
 
 from image_generation import generate_image
+from one_hot_encoding import oneHotEncode
+from ordinal_encoding import ordinalEncode
 
-def convert_problematic_data(data):
+def convert_problematic_data(data, encoding_algorithm):
     '''
     Takes a pandas dataframe
     Converts all data that is not numerical into numerical data. 
     Returns an updated dataframe with one hot encoding. 
     '''
-    df = data.infer_objects() 
-    category_columns = []
-    # Convert int datatypes to float datatypes
-    # This might be needed cause of the weird abod thingy
-    # for column in df:
-    #    if(df[column].dtype == "int64"):
-    #        df[column] = df[column].astype(float)
-    #        break
-
-    # Determine which columns are categorical
-    for column in df:
-        if(df[column].dtype == "object"):
-            df[column] = df[column].astype('category')
-            df = df.drop(columns=[column]) #Drop em for now but gotta actually do something with em later
-        elif(df[column].dtype == "bool"):
-            df = df.drop(columns=[column]) #Drop these too for now
-    #TODO: One hot encoding
+    df = data.infer_objects()
+    if (encoding_algorithm == "oneHot"):
+        df = oneHotEncode(df)
+    elif (encoding_algorithm == "ordinal"):
+        df = ordinalEncode(df)
 
     return df
 
@@ -180,7 +170,7 @@ def fit_model(model, numpy_data, ml=[], cl=[]):
 
     return model
 
-def compute_questions(filename, cluster_iter, question_num, cluster_num, must_link_constraints, cant_link_constraints, unknown_constraints, reduction_algorithm, evaluation_algorithms):
+def compute_questions(filename, cluster_iter, question_num, cluster_num, must_link_constraints, cant_link_constraints, unknown_constraints, reduction_algorithm, encoding_algorithm, evaluation_algorithms):
     '''
     Args:
         filename: name of the csv file
@@ -194,7 +184,7 @@ def compute_questions(filename, cluster_iter, question_num, cluster_num, must_li
     
     # ================Generate clustering model================
 
-    df = convert_problematic_data(pd.read_csv('datasets/' + filename))
+    df = convert_problematic_data(pd.read_csv('datasets/' + filename), encoding_algorithm)
     numpy_data = df.to_numpy()
     # Will not be aware of ml or cl constraints until after user passes Iteration 1
     if int(cluster_iter) != 1:
@@ -336,7 +326,8 @@ ml = sys.argv[5].split(",")
 cl = sys.argv[6].split(",")
 unknown = sys.argv[7].split(",")
 reduction_algorithm = sys.argv[8]
-evaluation_algorithms = sys.argv[9].split(',')
+encoding_algorithm = sys.argv[9]
+evaluation_algorithms = sys.argv[10].split(',')
 
 # filename = 'Pokemon_no_string.csv'
 # cluster_iter = '1'
@@ -346,9 +337,10 @@ evaluation_algorithms = sys.argv[9].split(',')
 # cl = []
 # unknown = []
 # reduction_algorithm = "TSNE"
+# encoding_algorithm = "OneHot"
 # evaluation_algorithms = ['1','1','1','1','1']
 
 start = timer()
-compute_questions(filename, cluster_iter, question_num, cluster_num, ml, cl, unknown, reduction_algorithm, evaluation_algorithms)
+compute_questions(filename, cluster_iter, question_num, cluster_num, ml, cl, unknown, reduction_algorithm, encoding_algorithm, evaluation_algorithms)
 end = timer()
 print("interactive_constrained_clustering algo runtime: ", end-start)
