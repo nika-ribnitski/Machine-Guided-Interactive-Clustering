@@ -10,6 +10,7 @@ export class FormInput {
     cl = []
     unknown = []
     reduction_algorithm = cookies.reduction_algorithm
+    encoding_algorithm = cookies.encoding_algorithm
     checked = cookies.checked // for frontend (initally-checked Evaluation Algorithms)
     algorithmsUsed = [] // for backend (checked-on-submission Evaluation Algorithms)
 }

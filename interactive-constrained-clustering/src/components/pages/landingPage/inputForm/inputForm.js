@@ -95,6 +95,7 @@ class FileForm extends Component {
                                                 }
                                                 values.filename = this.fileName
                                                 values.reduction_algorithm = document.getElementById("reduction_algorithm").value
+                                                values.encoding_algorithm = document.getElementById("encoding_algorithm").value
 
                                                 var algorithmsUsed = []
                                                 var checkboxes = document.querySelectorAll('input[type=checkbox]')
@@ -166,13 +167,22 @@ class FileForm extends Component {
                                                 </Row>
                                                 <Row>
                                                     <Col>
+                                                        <div class="mt-3">Encoding Algorithm for Categorical Values:</div>
+                                                        <Field as="select" id="encoding_algorithm" name="encoding_algorithm">
+                                                            <option value="oneHot">One-Hot Encoding</option>
+                                                            <option value="ordinal">Ordinal Encoding</option>
+                                                        </Field>
+                                                    </Col>
+                                                </Row>
+                                                <Row>
+                                                    <Col>
                                                         <div class="mt-3"/>
                                                         Evaluation Algorithms:
                                                         <MyCheckBoxInput/>
                                                     </Col>
                                                 </Row>
                                                 <Row className="align-middle align-items-center text-center mt-3">
-                                                    <Button type="submit" className="mt-3">Start</Button>
+                                                    <Button type="submit">Start</Button>
                                                 </Row>
                                             </Form>
                                         </Formik>

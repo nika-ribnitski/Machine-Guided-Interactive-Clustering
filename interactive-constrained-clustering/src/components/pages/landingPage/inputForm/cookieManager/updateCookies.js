@@ -5,5 +5,6 @@ export function updateCookies(values) {
     document.cookie = "numberOfClusters=" + values.numberOfClusters;
     document.cookie = "maxConstraintPercent=" + values.maxConstraintPercent;
     document.cookie = "reduction_algorithm=" + values.reduction_algorithm;
+    document.cookie = "encoding_algorithm=" + values.encoding_algorithm;
     document.cookie = "checked=" + values.checked;
 }

@@ -36,6 +36,10 @@ export default class InfoPanel extends Component {
                     {this.FormattedInfo("UMAP", "(Uniform Manifold Approximation and Projection) is similar to TSNE but is scalable - it can be applied directly to sparse matrices.", "https://en.wikipedia.org/wiki/Nonlinear_dimensionality_reduction#Uniform_manifold_approximation_and_projection", "Known to experience underflow issues with large datasets.")}
                     {this.FormattedInfo("PCA", "(Principal Component Analysis) statistical technique that transforms data to describes variation in fewer dimensions than the original data.", "https://en.wikipedia.org/wiki/Principal_component_analysis")}
                     <hr/>
+                    {this.FormattedInfo("Encoding Algorithm", "Tecnique for handling categorical (aka non-numerical) values by encoding them in a numerical format.")}
+                    {this.FormattedInfo("One-Hot Encoding", "Encodes categorical features using a one-hot aka one-of-K scheme.", "https://scikit-learn.org/0.16/modules/generated/sklearn.preprocessing.OneHotEncoder.html")}
+                    {this.FormattedInfo("Ordinal Encoding", "Encodes categorical features as an integer array.", "https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OrdinalEncoder.html")}
+                    <hr/>
                     {this.FormattedInfo("Evaluation Algorithms", "Algorithms developed to assess the effectiveness of clustering methods.")}
                     {this.FormattedInfo("iNNE", "(Isolation using Nearest Neighbor Ensemble) is an isolation-based anomaly detector.", "https://onlinelibrary.wiley.com/doi/abs/10.1111/coin.12156")}
                     {this.FormattedInfo("COPOD", "(Copula-Based Outlier Detection) identifies data points that deviate from general distribution.", "https://arxiv.org/abs/2009.09463")}
