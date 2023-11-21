@@ -12,7 +12,7 @@ def ordinalEncode(data):
 
     # limit dataset to only categorical columns
     cols = df.columns
-    numCols = df._get_numeric_data().columns
+    numCols = df.select_dtypes(exclude=['bool', 'object'])
     categoriesDf = df[list(set(cols) - set(numCols))]
     # fit encoder
     enc.fit(categoriesDf)

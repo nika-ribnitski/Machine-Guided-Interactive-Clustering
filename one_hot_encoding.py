@@ -12,9 +12,7 @@ def oneHotEncode(data):
     enc = OneHotEncoder()
 
     # limit dataset to only categorical columns
-    cols = df.columns
-    num_cols = df._get_numeric_data().columns
-    catCols = list(set(cols) - set(num_cols))
+    catCols = list(df.select_dtypes((object, bool)))
     # print('categorical columns: ', catCols)
 
     # transform
@@ -36,8 +34,9 @@ def oneHotEncode(data):
     # print('new array with categorical columns included: ', dfNew)
 
     # final dataframe to be only numerical
-    dfNew = dfNew.select_dtypes(exclude=['object'])
+    dfNew = dfNew.select_dtypes((int, float))
     # print('final array with categorical columns excluded: ', dfNewn)
+    # print('final array types: ', dfNew.dtypes)
 
     return dfNew
 

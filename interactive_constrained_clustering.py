@@ -33,10 +33,16 @@ def convert_problematic_data(data, encoding_algorithm):
     Returns an updated dataframe with one hot encoding. 
     '''
     df = data.infer_objects()
-    if (encoding_algorithm == "oneHot"):
-        df = oneHotEncode(df)
-    elif (encoding_algorithm == "ordinal"):
-        df = ordinalEncode(df)
+
+    catCols = list(df.select_dtypes((object, bool)))
+    print('catCols: ', catCols)
+
+    if (catCols != []):
+        print('need to encode')
+        if (encoding_algorithm == "oneHot"):
+            df = oneHotEncode(df)
+        elif (encoding_algorithm == "ordinal"):
+            df = ordinalEncode(df)
 
     return df
 
