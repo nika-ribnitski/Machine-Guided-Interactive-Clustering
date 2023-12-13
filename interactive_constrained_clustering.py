@@ -4,6 +4,7 @@ import sys
 import pickle
 from multiprocessing.pool import ThreadPool
 import time
+import ctypes
 
 import numpy as np
 import pandas as pd
@@ -346,7 +347,10 @@ evaluation_algorithms = sys.argv[10].split(',')
 # encoding_algorithm = "OneHot"
 # evaluation_algorithms = ['1','1','1','1','1']
 
-start = timer()
-compute_questions(filename, cluster_iter, question_num, cluster_num, ml, cl, unknown, reduction_algorithm, encoding_algorithm, evaluation_algorithms)
-end = timer()
-print("interactive_constrained_clustering algo runtime: ", end-start)
+# start = timer()
+try: 
+    compute_questions(filename, cluster_iter, question_num, cluster_num, ml, cl, unknown, reduction_algorithm, encoding_algorithm, evaluation_algorithms)
+# end = timer()
+#print("interactive_constrained_clustering algo runtime: ", end-start)
+except: 
+    ctypes.windll.user32.MessageBoxW(0, "An error has occured. Please try again. If the error persists, please try different input values.", "Error", 1)
